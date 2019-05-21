@@ -7,6 +7,8 @@ import { ShoppingModule } from "./shopping/shopping.module";
 import { HomeComponent, ListComponent, NotFoundComponent } from "./menulinks.component";
 import {Routes, RouterModule} from "@angular/router"
 import {FormsModule} from "@angular/forms"
+import { ProductService } from "./shared/services/product.service";
+import { CartService } from "./shared/services/cart.service";
 
 let appRoutes:Routes = [
     // {path:"", component: HomeComponent},
@@ -25,6 +27,8 @@ let appRoutes:Routes = [
 
     // Module Dependencies
     imports: [ BrowserModule, LoginModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
+
+    providers: [ProductService, CartService ]
 
 })
 export class AppModule {

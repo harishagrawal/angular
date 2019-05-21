@@ -1,15 +1,16 @@
   <h3>List of products</h3>
   <div class="card-deck">
-    <div class="card">
+    <div class="card" *ngFor="let product of products" >
       <div class="card-header bg-warning">
-        <b>Product Name</b>
+        <b>{{product.name}}</b>
       </div>
       <div class="card-body">
-        Price:
-        <br>Description:
+        Rs.{{product.price}}/-
+        <br>
+        <b>"{{product.description}}"</b>
       </div>
       <div class="card-footer">
-        <button class="btn btn-primary">Add to Cart</button>
+        <button class="btn btn-primary" (click)="addToCart(product)">Add to Cart</button>
       </div>
     </div>
   </div>
