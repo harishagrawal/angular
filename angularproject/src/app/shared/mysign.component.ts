@@ -18,15 +18,15 @@ export class MySignComponent implements OnDestroy, OnInit, OnChanges {
     myEvent = new EventEmitter()
 
     constructor(){
-        console.log("MySign component constructor")
+        console.log("MySign component constructor: ", this.title)
     }
     
     ngOnChanges(){
-        console.log("MySign component ngOnChanges")
+        console.log("MySign component ngOnChanges: ", this.title)
     }
 
     ngOnInit(){
-        console.log("MySign component ngOnInit")
+        console.log("MySign component ngOnInit: ", this.title)
     }
 
     ngOnDestroy(){

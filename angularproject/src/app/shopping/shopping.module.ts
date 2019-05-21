@@ -1,7 +1,10 @@
 import { NgModule } from "@angular/core";
+import { ProductsComponent } from './products.component';
+import { CartitemsComponent } from './cartitems.component';
 
 @NgModule({
 
+  declarations: [ProductsComponent, CartitemsComponent]
 })
 export class ShoppingModule{
     constructor() {
