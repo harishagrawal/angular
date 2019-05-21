@@ -30,8 +30,14 @@ export class HomeComponent{
 @Component({
     selector: "app-list",
     template: `
-    <app-products></app-products>
-    <app-cartitems></app-cartitems>
+    <div class="row">
+        <div class="col-sm-7">
+            <app-products></app-products>
+        </div>
+        <div class="col-sm-5">
+            <app-cartitems></app-cartitems>
+        </div>
+    </div>
     `
 })
 export class ListComponent{
