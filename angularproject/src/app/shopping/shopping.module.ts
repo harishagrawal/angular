@@ -4,7 +4,8 @@ import { CartitemsComponent } from './cartitems.component';
 
 @NgModule({
 
-  declarations: [ProductsComponent, CartitemsComponent]
+  declarations: [ProductsComponent, CartitemsComponent],
+  exports: [ProductsComponent, CartitemsComponent]
 })
 export class ShoppingModule{
     constructor() {

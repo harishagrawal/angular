@@ -29,7 +29,10 @@ export class HomeComponent{
 
 @Component({
     selector: "app-list",
-    template: `My Shopping List`
+    template: `
+    <app-products></app-products>
+    <app-cartitems></app-cartitems>
+    `
 })
 export class ListComponent{
     constructor(){
