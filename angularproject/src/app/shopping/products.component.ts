@@ -11,6 +11,8 @@ import { CartItem } from './models/cartitems.model';
 })
 export class ProductsComponent implements OnInit {
   products:Product[];
+  myDate = new Date();
+  queryString:string = '';
 
   constructor(private psvc:ProductService, private csvc:CartService) { 
   }
@@ -21,6 +23,15 @@ export class ProductsComponent implements OnInit {
 
   addToCart(prod:Product) {
     let item:CartItem = new CartItem(prod.id, prod.name, prod.price, 1)
+    let existingItems:CartItem[] = this.csvc.getCartItems()
+    // TODO: also check how to prevent negative qty
+    // Check if the item exists in the cart then increment quantity
+
+    // for item of existingItems {
+    //     if item
+    // }
+    
+    // Else add it to the cart
     this.csvc.addCartItem(item)
   }
 }

@@ -1,11 +1,15 @@
   <h3>List of products</h3>
+  <div>
+      <div colspan="1">{{myDate | date:"MMM/dd/yyyy"}}</div>
+        <input placeholder="Input here to search" [(ngModel)]="queryString">
+  </div>
   <div class="card-deck">
-    <div class="card" *ngFor="let product of products" >
+    <div class="card" *ngFor="let product of products | searchData:queryString:'name'" >
       <div class="card-header bg-warning">
-        <b>{{product.name}}</b>
+        <b>{{product.name | uppercase }}</b>
       </div>
       <div class="card-body">
-        Rs.{{product.price}}/-
+        {{product.price | currency:'JPY'}}
         <br>
         <b>"{{product.description}}"</b>
       </div>

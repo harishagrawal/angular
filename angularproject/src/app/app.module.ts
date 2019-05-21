@@ -9,6 +9,7 @@ import {Routes, RouterModule} from "@angular/router"
 import {FormsModule} from "@angular/forms"
 import { ProductService } from "./shared/services/product.service";
 import { CartService } from "./shared/services/cart.service";
+// import { SearchDataPipe } from "./shared/searchdata.pipe";
 
 let appRoutes:Routes = [
     // {path:"", component: HomeComponent},
