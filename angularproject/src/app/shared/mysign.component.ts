@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter } from "@angular/core"
+import { Component, Input, Output, EventEmitter, OnInit, OnChanges, OnDestroy } from "@angular/core"
 
 @Component({
     selector: "my-sign",
@@ -10,17 +10,29 @@ import { Component, Input, Output, EventEmitter } from "@angular/core"
         (click)="handleButtonClick(txtUser.value, txtPwd.value)" >{{title}}</button>
     `
 })
-export class MySignComponent{
+export class MySignComponent implements OnDestroy, OnInit, OnChanges {
     @Input()
     title:string;
 
     @Output()
     myEvent = new EventEmitter()
 
-    // constructor(){
-    //     console.log("MySign component constructor")
-    // }
+    constructor(){
+        console.log("MySign component constructor")
+    }
     
+    ngOnChanges(){
+        console.log("MySign component ngOnChanges")
+    }
+
+    ngOnInit(){
+        console.log("MySign component ngOnInit")
+    }
+
+    ngOnDestroy(){
+        console.log("MySign component ngOnDestroy")
+    }
+
     handleButtonClick(usr:string, pwd:string) {
         console.log("User:", usr, "Password:", pwd)
         this.myEvent.emit({usr, pwd})
