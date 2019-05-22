@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { AppComponent } from "./app.component";
 import { AppHeaderComponent } from "./app.header.component";
 import { BrowserModule } from "@angular/platform-browser"
-import { LoginModule } from "./login/login.module";
+// import { LoginModule } from "./login/login.module";
 import { ShoppingModule } from "./shopping/shopping.module";
 import { HomeComponent, ListComponent, NotFoundComponent } from "./menulinks.component";
 import {Routes, RouterModule} from "@angular/router"
@@ -35,9 +35,9 @@ let appRoutes:Routes = [
     // Module Dependencies
     // imports: [ BrowserModule, LoginModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
     // remove LoginModule and instead add path for Lazy loading
-    imports: [ BrowserModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
+    imports: [ BrowserModule, ShoppingModule, RouterModule.forRoot(appRoutes, {useHash: true}), FormsModule ],
 
-    providers: [ProductService, CartService, CategoryService ]
+    providers: [ProductService, CartService, CategoryService]
 
 })
 export class AppModule {

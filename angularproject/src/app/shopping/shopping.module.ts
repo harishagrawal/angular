@@ -6,13 +6,14 @@ import {FormsModule} from "@angular/forms";
 import { SharedModule } from "../shared/shared.module";
 import {RouterModule} from "@angular/router"
 import { CategoryComponent } from "./category/category.component";
+import { LoginGuard } from '../shared/services/login.guard';
 
 @NgModule({
 
   declarations: [ProductsComponent, CartitemsComponent, CategoryComponent],
   exports: [ProductsComponent, CartitemsComponent, CategoryComponent],
   imports: [ CommonModule, FormsModule, SharedModule, 
-    RouterModule.forChild([{path:"categories",component: CategoryComponent}]) ],
+    RouterModule.forChild([{path:"categories",component: CategoryComponent, canActivate: [LoginGuard]}]) ],
 })
 export class ShoppingModule{
     constructor() {

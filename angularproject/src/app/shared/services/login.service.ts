@@ -1,5 +1,4 @@
 import { Injectable } from '@angular/core';
-import { typeWithParameters } from '@angular/compiler/src/render3/util';
 
 @Injectable({
   providedIn: 'root'
@@ -15,13 +14,13 @@ export class LoginService {
     this.isAdminLoggedIn = newval;
   }
 
-  isValidUser(username:string, password:string) {
+  isValidUser(username:string, pwd:string) {
     if (username == 'admin') {
+      this.setIsAdminLoggedIn(true)
       return true;
     } else {
       return false;
     }
-      
   }
 
   constructor() { }
