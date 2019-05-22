@@ -31,10 +31,22 @@ export class HomeComponent{
     selector: "app-list",
     template: `
     <div class="row">
-        <div class="col-sm-7">
-            <app-products></app-products>
+        <div class="col-sm-3 card">
+            <div class="card-header bg-info">
+                <b>Categories</b>
+            </div>
+            <div class="card-body">
+                <ul class="list-group">
+                    <li class="list-grou-item">
+                        <a routerLink="1">Category1</a>
+                    </li>
+                </ul>
+            </div>
         </div>
         <div class="col-sm-5">
+            <app-products></app-products>
+        </div>
+        <div class="col-sm-4">
             <app-cartitems></app-cartitems>
         </div>
     </div>
