@@ -1,11 +1,11 @@
 import { NgModule } from "@angular/core";
 import { MySignComponent } from './mysign.component';
 import { SearchDataPipe } from "./searchdata.pipe";
-import { CategoryComponent } from './services/category/category.component';
 import { HttpClientModule } from '@angular/common/http';
+// import { FormsModule } from '@angular/forms';
 
 @NgModule({
-    declarations: [MySignComponent, SearchDataPipe, CategoryComponent],
+    declarations: [MySignComponent, SearchDataPipe],
     exports: [MySignComponent, SearchDataPipe],
     imports: [ HttpClientModule ]
 })

@@ -1,5 +1,16 @@
-{"wscategories":[
-    {"id":1, "name": "Mobiles"},
-    {"id":2, "name": "Electronics"}
-    ]
+{
+  "wscategories": [
+    {
+      "id": 1,
+      "name": "MobilesX"
+    },
+    {
+      "id": 2,
+      "name": "Electronics"
+    },
+    {
+      "name": "newCtg",
+      "id": 3
+    }
+  ]
 }

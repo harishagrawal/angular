@@ -1,7 +1,8 @@
 export class Product {
     
     // Define and initialize using TypeScript syntax
-    constructor(public id:number, public name:string, public price:number, public description:string){}
+    constructor(public id:number, public name:string, public price:number, 
+        public description:string, public ctgid:number){}
     
     /*
     // Standard way of defining and initializing

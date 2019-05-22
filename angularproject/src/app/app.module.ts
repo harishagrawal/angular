@@ -9,6 +9,7 @@ import {Routes, RouterModule} from "@angular/router"
 import {FormsModule} from "@angular/forms"
 import { ProductService } from "./shared/services/product.service";
 import { CartService } from "./shared/services/cart.service";
+import { CategoryService } from './shared/services/category.service';
 // import { SearchDataPipe } from "./shared/searchdata.pipe";
 
 let appRoutes:Routes = [
@@ -29,7 +30,7 @@ let appRoutes:Routes = [
     // Module Dependencies
     imports: [ BrowserModule, LoginModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
 
-    providers: [ProductService, CartService ]
+    providers: [ProductService, CartService, CategoryService ]
 
 })
 export class AppModule {
