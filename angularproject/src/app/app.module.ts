@@ -21,6 +21,7 @@ let appRoutes:Routes = [
         {path: "", component: ProductsComponent},
         {path: ":ctgid", component: ProductsComponent},
     ] },
+    {path:"login", loadChildren: "./login/login.module#LoginModule"},
     {path: "**", component: NotFoundComponent}
 ]
 
@@ -32,7 +33,9 @@ let appRoutes:Routes = [
     bootstrap: [AppComponent],
 
     // Module Dependencies
-    imports: [ BrowserModule, LoginModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
+    // imports: [ BrowserModule, LoginModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
+    // remove LoginModule and instead add path for Lazy loading
+    imports: [ BrowserModule, ShoppingModule, RouterModule.forRoot(appRoutes), FormsModule ],
 
     providers: [ProductService, CartService, CategoryService ]
 
