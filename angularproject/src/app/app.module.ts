@@ -10,13 +10,17 @@ import {FormsModule} from "@angular/forms"
 import { ProductService } from "./shared/services/product.service";
 import { CartService } from "./shared/services/cart.service";
 import { CategoryService } from './shared/services/category.service';
+import { ProductsComponent } from './shopping/products.component';
 // import { SearchDataPipe } from "./shared/searchdata.pipe";
 
 let appRoutes:Routes = [
     // {path:"", component: HomeComponent},
     {path:"home", component: HomeComponent},
     {path:"", redirectTo: "home",  pathMatch: "full"},
-    {path: "cart", component: ListComponent},
+    {path: "cart", component: ListComponent, children: [
+        {path: "", component: ProductsComponent},
+        {path: ":ctgid", component: ProductsComponent},
+    ] },
     {path: "**", component: NotFoundComponent}
 ]
 

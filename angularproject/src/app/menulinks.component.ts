@@ -31,28 +31,29 @@ export class HomeComponent{
 
 @Component({
     selector: "app-list",
-    template: `
-    <div class="row">
-        <div class="col-sm-3 card">
-            <div class="card-header bg-info">
-                <b>Categories</b>
-            </div>
-            <div class="card-body">
-                <ul class="list-group">
-                    <li class="list-group-item" *ngFor="let link of ctgLinks">
-                        <a routerLink="../wscategories/{{link.id}}">{{link.name}}</a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        <div class="col-sm-5">
-            <app-products></app-products>
-        </div>
-        <div class="col-sm-4">
-            <app-cartitems></app-cartitems>
-        </div>
-    </div>
-    `
+    templateUrl: "./list.component.html"
+    // template: `
+    // <div class="row">
+    //     <div class="col-sm-3 card">
+    //         <div class="card-header bg-info">
+    //             <b>Categories</b>
+    //         </div>
+    //         <div class="card-body">
+    //             <ul class="list-group">
+    //                 <li class="list-group-item" *ngFor="let link of ctgLinks">
+    //                     <a routerLink="../wscategories/{{link.id}}">{{link.name}}</a>
+    //                 </li>
+    //             </ul>
+    //         </div>
+    //     </div>
+    //     <div class="col-sm-5">
+    //         <app-products></app-products>
+    //     </div>
+    //     <div class="col-sm-4">
+    //         <app-cartitems></app-cartitems>
+    //     </div>
+    // </div>
+    // `
 })
 export class ListComponent implements OnInit {
     ctgLinks:Category[] = []

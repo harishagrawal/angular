@@ -3,6 +3,7 @@ import { ProductService } from '../shared/services/product.service';
 import { Product } from './models/product.models';
 import { CartService } from '../shared/services/cart.service';
 import { CartItem } from './models/cartitems.model';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-products',
@@ -14,11 +15,21 @@ export class ProductsComponent implements OnInit {
   myDate = new Date();
   queryString:string = '';
 
-  constructor(private psvc:ProductService, private csvc:CartService) { 
+  constructor(private psvc:ProductService, private csvc:CartService,
+    private ar:ActivatedRoute) { 
   }
 
   ngOnInit() {
-    this.products = this.psvc.getProducts()
+    this.ar.params.subscribe(
+      (paramData) => {
+        let paramId = paramData.ctgid;
+        if (paramId == undefined) {
+          this.products = this.psvc.getProducts()   
+        } else {
+          this.products = this.psvc.getProducts().filter((e) => e.ctgid == paramId)
+        }
+      }
+    )
   }
 
   addToCart(prod:Product) {
