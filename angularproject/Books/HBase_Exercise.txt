@@ -1,0 +1,79 @@
+// Create a table customer with column family addr and order
+
+create 'customer', {NAME=>'addr'}, {NAME=>'order'}
+
+// Use ‘scan’ to retrieve rows of data for the table
+
+scan 'customer'
+
+describe 'customer'
+
+// Put data into the table
+
+put 'customer', 'jsmith', 'addr:city', 'nashville'
+
+// Use ‘scan’ to retrieve rows of data for the table
+scan 'customer'
+
+get 'customer', 'jsmith'
+
+// Put more data into the table
+
+put  'customer',  'jsmith',  'addr:state', 'TN'
+put  'customer',  'jsmith',  'order:numb', '1234'
+put  'customer',  'jsmith',  'order:date', '10-18-2014'
+
+//Use get to retrieve the data for ‘jsmith’
+
+get 'customer', 'jsmith'
+
+//Note that this gets all the data for the row. How can we limit this to only one column family ?
+
+get 'customer', 'jsmith', {COLUMNS=>['addr']}
+
+// How can we limit this to a specific column?
+
+get 'customer', 'jsmith', {COLUMNS=>['order:numb']}
+
+// put more order numbers
+
+put   'customer',  'jsmith',  'order:numb', '1235'
+put   'customer',  'jsmith',  'order:numb', '1236'
+put   'customer',  'jsmith',  'order:numb', '1237'
+put   'customer',  'jsmith',  'order:numb', '1238'
+
+// Get order number column cells
+
+get 'customer', 'jsmith', {COLUMNS=>['order:numb']}
+
+// put more data for different rowkey userids
+
+put   'customer',  'njones',  'addr:city', 'miami'
+put   'customer',    'njones',  'addr:state', 'FL'
+put   'customer',   'njones',  'order:numb', '5555'
+put   'customer',   'tsimmons',  'addr:city', 'dallas'
+put   'customer',    'tsimmons',  'addr:state', 'TX'
+put   'customer',    'jsmith',  'addr:city', 'denver'
+put   'customer',    'jsmith',  'addr:state', 'CO'
+put   'customer',    'jsmith',  'order:numb', '6666'
+put   'customer',    'njones',  'addr:state', 'TX'
+put   'customer',    'amiller', 'addr:state', 'TX'
+
+// Use ‘scan’ to retrieve rows of data for the table
+
+scan 'customer'
+
+// delete a column
+
+delete 'customer', 'njones', 'addr:city'
+
+// delete a column family
+
+delete   'customer',  'jsmith',   'addr:'
+
+get   'customer',  'jsmith'
+
+// Delete a Table with the shell
+
+disable   'customer'
+drop   'customer'

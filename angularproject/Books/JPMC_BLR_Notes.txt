@@ -1,0 +1,326 @@
+What is Hadoop?
+ - Distributed Computing Framework for processing Big Data
+
+What is HDFS?
+ - Hadoop Distributed File System
+ - Stores Big Data in a distributed fashion
+
+What is YARN?
+ - Yet Another Resource Negotiator
+ - Cluster Resource Management and parallel processing
+ - YARN makes an effort to put the computation on the node where the data resides
+
+Traditional System Vs Hadoop MapReduce
+ - Store 10x more
+ - Process 10x faster
+
+Hadoop MapReduce Vs Spark
+ - Run spark programs 10x faster than MapReduce
+
+
+
+
+
+
+
+
+-----------------------------------
+Core Hadoop = HDFS + YARN
+-----------------------------------
+
+-----------------------------------
+Ecosystem Components - Give different capabilities to the cluster like (analytics, ingestion, authentication, authorization, reporting, workflows etc.)
+
+Data Analytics Flow
+
+Ingest --> Store --> Process --> Analyze --> Report
+Sqoop	   HDFS	     YARN        Hive	     (Zeppelin)
+Flume	   (KUDU)		 Impala      HUE
+(Kafka)    (MapRFS)		 (Pig)
+FsShell				 (Search)
+(NFS Mount)			 (Storm)
+				 Spark
+				 HBase
+				 (Mahout)
+				 (Giraph)
+
+Cluster Administration - Ambari, Cloudera Manager, ZK
+Security - Sentry, Kerberos
+-----------------------------------
+
+
+
+
+-----------------------------------
+HDFS Component - Distributed Storage
+ - NameNode (M)
+ - SecondaryNameNode (M)
+ - DataNode(S)
+
+YARN Component - Parallel processing
+ - ResourceManager (M)
+ - NodeManager (S)
+-----------------------------------
+
+MapReduce is in built within the framework, to execute MapReduce programs, no extra packages need to be setup
+
+However, if we need other tools like Hive / Impala..., each of these would spawn their daemons
+-----------------------------------
+
+
+
+
+
+Hadoop Roles
+
+Hadoop Developer (Pre-Requisite - Programming skills)
+ - MR, Spark, Java
+
+Hadoop Analyst (Pre-Requisite - SQL)
+ - Hive, Impala, Pig, Spark
+
+Hadoop Administrator (Pre-Requisite - Linux, DBA)
+ - Ambari, CM, ZK
+
+Data Scientist (Pre-Requisite - P&S)
+ - R, Spark
+
+Architect 
+
+Data Migration
+ - Sqoop, Flume, Kafka...
+
+QA 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Problem Statement: WordCount - Count the occurrence of each word in the file
+
+Input
+
+Welcome to Hadoop
+Learning Hadoop is fun
+Hadoop Hadoop Hadoop is the buzz
+
+Output
+
+Hadoop 5
+Learning 1
+Welcome 1
+buzz 1
+fun 1
+is 2
+the 1
+to 1
+
+
+
+
+
+
+
+MapReduce program - WordCount.java
+
+Mapper class
+ - map()
+Reducer class
+ - reduce()
+main()
+
+
+YARN - Puts program to data
+
+
+
+
+
+
+
+
+
+
+
+
+
+	http://collabedit.com/se9dm
+
+To understand HDFS better - 
+Hadoop: The Definitive Guide
+Chapter 4: 
+	Data Flow
+
+To understand YARN better - 
+Hadoop: The Definitive Guide
+Chapter 6: 
+	Anatomy of a MapReduce Job Run - YARN
+
+
+
+
+
+
+
+
+
+$ sqoop version
+
+$ sqoop list-databases --connect jdbc:mysql://localhost:3306 --username root -P 
+
+$ sqoop list-tables --connect jdbc:mysql://localhost:3306/retail_db --username root -P
+
+$ sqoop import --connect jdbc:mysql://localhost:3306/retail_db --username root -P --table categories --target-dir /categories_import -m 1
+
+$ sqoop import --connect jdbc:mysql://localhost:3306/retail_db --username root -P --table categories --target-dir /categories_import_p -m 2
+
+
+Sqoop Export
+
+On Terminal 1 (MySQL)
+mysql> create database sample;
+
+mysql> use sample;
+
+mysql> CREATE TABLE categories_new(category_id int(11) PRIMARY KEY, category_dept_id int(11), category_name varchar(50));
+
+mysql> select * from categories_new;
+
+On Terminal 2
+
+$ sqoop export --connect jdbc:mysql://localhost:3306/sample --username root --P --table categories_new --export-dir /categories_import_p
+
+On Terminal 1 (MySQL)
+
+mysql> select * from categories_new;
+
+
+
+
+
+
+
+
+
+Hive is NOT RDBMS
+
+What is Hive?
+ - DWH capabilities for HDFS datasets
+
+Hive WordCount
+
+hive> select word, count(*) from table1 LATERAL VIEW explode(split(col1, ' ')) ltable as word GROUP BY word;
+
+LATERAL VIEW explode - HiveQL
+
+ltable
+
+word
+
+Welcome 
+to 
+Hadoop
+
+
+
+
+
+Schema On Write - RDBMS - Data is validated against the schema while loaded
+
+Schema on Read - Hive - Data is validated against the schema while queried - Flexibility
+
+
+
+
+
+
+
+
+hive> 
+
+CREATE TABLE categories_new(category_id int, 
+category_dept_id int, category_name string) 
+row format delimited 
+fields terminated by ',' 
+location '/categories_import_p'
+;
+
+
+
+load data local inpath '/home/cloudera/Desktop/Labs/emp.txt' into table employee;
+create table mailid (name string, email string) row format delimited fields terminated by ',';
+
+load data local inpath '/home/cloudera/Desktop/Labs/email.txt' into table mailid;
+
+hive>  SET hive.auto.convert.join=false;
+
+hive>  select a.name,a.city,a.salary,b.email  from employee a  inner join mailid b on a.name = b.name;
+
+
+
+
+
+
+
+What is Spark?
+ - A general purpose, large scale data processing engine offering lightening speed cluster computing
+
+ - 1st release - around 2011
+ - Integration to Hadoop - around 2014
+
+- Unified platform for all types of analysis
+
+- Languages - Scala, Python, R, Java
+- Libraries - Spark-SQL, ML-Lib, GraphX, Streaming
+- Processing - YARN, Spark Cluster Manager, Mesos
+- Storage - HDFS, NoSQL, Local, S3
+
+- Upcoming tool for advanced analytics
+
+What is Scala?
+ - Programming language
+ - Scala code is compiled into a bytecode and a JVM will execute the bytecode
+
+
+
+
+
+
+
+
+
+val textFile = sc.textFile("hdfs://localhost:8020/Sample/SampleFile.txt")
+val counts = textFile.flatMap(line => line.split(" ")).map(word => (word, 1)).reduceByKey(_ + _)
+counts.saveAsTextFile("hdfs://localhost:8020/Sample/WCOP")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
